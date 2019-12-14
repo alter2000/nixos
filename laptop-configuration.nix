@@ -43,6 +43,7 @@ in
       enable = true;
       package = pkgs.pulseaudioFull;
       support32Bit = true;
+      extraModules = with pkgs; [ pulseaudio-modules-bt ];
     };
 
     trackpoint = lcfg.hardware.trackpoint or {
@@ -56,15 +57,17 @@ in
       driSupport32Bit = true;
       driSupport = true;
       extraPackages = [ pkgs.vaapiIntel ];
+      extraPackages32 = [ pkgs.pkgsi686Linux.libva ];
     };
 
-    # bluetooth = {
-    #   enable = true;
-    #   extraConfig = ''
-    #     [General]
-    #     Enable=Source,Sink,Media,Socket
-    #   '';
-    # };
+    bluetooth = {
+      enable = true;
+      package = pkgs.bluezFull;
+      # extraConfig = ''
+      #   [General]
+      #   Enable=Source,Sink,Media,Socket
+      # '';
+    };
 
   };
 
