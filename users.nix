@@ -23,10 +23,12 @@
           "ansible"
           "dialout"
           "docker"
+          "kubernetes"
           "libvirtd"
           "networkmanager"
           "video"
-          "wheel"];
+          "wheel"
+        ];
         home = "/home/alter2000";
         createHome = true;
         shell = pkgs.zsh;

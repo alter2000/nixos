@@ -94,12 +94,13 @@ in
   }];
 
   location = {
-    provider = "geoclue2";
-    # latitude = 50.0;
-    # longitude = 10.0;
+    provider = "manual";
+    latitude = 50.0;
+    longitude = 10.0;
   };
 
   services = {
+
     thinkfan = {
       enable = true;
       fan = "tp_fan /proc/acpi/ibm/fan";

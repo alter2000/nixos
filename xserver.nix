@@ -17,9 +17,6 @@
     '';
   };
 
-  multitouch.enable = true;
-  multitouch.tapButtons = true;
-
   displayManager = {
 
     # sessionCommands = "exec ~/.xsession";

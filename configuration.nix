@@ -35,6 +35,7 @@
 
   nix = {
     allowedUsers = ["@wheel"];
+    trustedUsers = ["alter2000" "root"];
     autoOptimiseStore = true;
     buildCores = 3;
     maxJobs = 3;
