@@ -32,7 +32,7 @@ in
       ranger ripgrep rsync ruby
       stdmanpages
       tmux tree
-      w3m wget wirelesstools
+      wget wirelesstools
 
       aspell aspellDicts.en aspellDicts.fr aspellDicts.de
       gucharmap gvfs

@@ -40,7 +40,7 @@ in
     };
 
     openssh = {
-      enable = true;
+      enable = false;
       startWhenNeeded = true;
       allowSFTP = true;
       ports = [40];
@@ -60,7 +60,6 @@ in
     #     interval = "daily";
     #   };
     # };
-    openvpn.servers.officeVPN = import /home/alter2000/var/vpn/config.nix;
 
   };
 }
