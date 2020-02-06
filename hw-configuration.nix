@@ -78,4 +78,8 @@ in
   };
 
   nix.maxJobs = lib.mkDefault 3;
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
 }

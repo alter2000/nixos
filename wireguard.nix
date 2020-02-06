@@ -1,12 +1,12 @@
 { networking, ... }:
 
 let
-  serverAddr = "104.248.21.175:51820";
+  serverAddr = "209.97.134.36:51820";
 in
 
 {
   # Enable Wireguard
-  networking.wireguard.enable = false;
+  networking.wireguard.enable = true;
   # "wg0" is the network interface name. You can name the interface arbitrarily.
   networking.wireguard.interfaces.wg0 = {
     # Determines the IP address and subnet of the client's end of the tunnel interface.
@@ -23,12 +23,12 @@ in
       # For a client configuration, one peer entry for the server will suffice.
       {
         # Public key of the server (not a file path).
-        publicKey = "TJhjHCiHczCQr+RqjtLQQsb+mTPed/iVQURExTGGG0c=";
+        publicKey = "gySQ8MJbSpBQyWlRdkpU47lhSmlcHPiJlVtwvqoNhmY=";
 
         # Forward all the traffic via VPN.
-        allowedIPs = [ "0.0.0.0/0" ];
+        # allowedIPs = [ "0.0.0.0/0" ];
         # Or forward only particular subnets
-        #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
+        allowedIPs = [ "10.100.0.0/24" ];
 
         # Set this to the server IP and port.
         endpoint = serverAddr;

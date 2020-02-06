@@ -125,6 +125,8 @@ in
     xserver = (import ./xserver.nix { inherit pkgs; });
 
     xbanish.enable = true;
+    # wait for 0.12
+    # ratbagd.enable = true;
 
     redshift = {
       enable = true;

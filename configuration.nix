@@ -13,7 +13,7 @@
     ./systemd.nix
     ./users.nix
     /etc/nixos/cachix.nix
-    # ./kubernetes.nix
+    ./wireguard.nix
   ];
 
   security = {
