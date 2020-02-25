@@ -39,13 +39,26 @@
   };
 
   virtualisation = {
-    docker.enable = true;
-    # libvirtd.enable = true;
+    anbox.enable = true;
+
+    libvirtd = {
+      enable = true;
+      allowedBridges = [ "virbr0" "docker0" ];
+    };
+
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      autoPrune.flags = [ "--all" ];
+    };
+
     virtualbox.host = {
       enable = false;
       addNetworkInterface = true;
-      headless = true;
+      enableExtensionPack = true;
+      # headless = true;
     };
+
   };
 
 }
