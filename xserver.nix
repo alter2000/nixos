@@ -18,7 +18,7 @@
   };
 
   displayManager = {
-
+    # default = "none+i3";
     # sessionCommands = "exec ~/.xsession";
 
     session = [ {
@@ -51,11 +51,11 @@
   };
 
   desktopManager.xterm.enable = false;
+
   desktopManager.default = "none";
+  windowManager.default = "i3";
 
   windowManager = {
-    default = "i3";
-
     # sway = {
     #   enable = true;
     #   package = pkgs.sway;

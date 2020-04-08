@@ -2,6 +2,10 @@
 
 let
   lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
+  unstable = import (fetchTarball
+      "channel:nixpkgs-unstable"
+      # "https://github.com/nixos/nixpkgs/master"
+    ) { inherit config; };
 in
 {
   networking = {
@@ -125,8 +129,6 @@ in
     xserver = (import ./xserver.nix { inherit pkgs; });
 
     xbanish.enable = true;
-    # wait for 0.12
-    # ratbagd.enable = true;
 
     redshift = {
       enable = true;
@@ -137,6 +139,11 @@ in
       extraOptions = [ "-g 0.8" ];
     };
 
+    lorri.enable = true;
   };
 
+  # ratbag
+  environment.systemPackages = [ unstable.libratbag unstable.piper ];
+  services.dbus.packages = [ unstable.libratbag ];
+  systemd.packages = [ unstable.libratbag ];
 }

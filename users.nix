@@ -1,14 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "uk";
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n.consoleFont = "Lat2-Terminus16";
+  i18n.consoleKeyMap = "uk";
 
-  # Set your time zone.
+  # console.font = "Lat2-Terminus16";
+  # console.keyMap = "uk";
+
+  i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Tirane";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -25,6 +24,7 @@
           "docker"
           "kubernetes"
           "libvirtd"
+          "lxd"
           "networkmanager"
           "video"
           "wheel"
@@ -39,7 +39,9 @@
   };
 
   virtualisation = {
-    anbox.enable = true;
+    # anbox.enable = true;
+    # lxc.enable = true;
+    # lxd.enable = true;
 
     libvirtd = {
       enable = true;
