@@ -19,7 +19,7 @@
 
   displayManager = {
     # default = "none+i3";
-    # sessionCommands = "exec ~/.xsession";
+    sessionCommands = "exec ~/.xsession";
 
     session = [ {
       name = "i3";
@@ -31,10 +31,8 @@
 
     lightdm = {
       enable = true;
-      autoLogin = {
-        enable = false;
-        user = "alter2000";
-      };
+      autoLogin.enable = false;
+      autoLogin.user = "alter2000";
       greeters.mini = {
         enable = true;
         user = "alter2000";

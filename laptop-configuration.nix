@@ -12,7 +12,7 @@ in
     hostName = lcfg.networking.hostName or "alterpad";
     dhcpcd.enable = false;
     networkmanager.enable = true;
-    useDHCP = true;
+    # useDHCP = true;
 
     hosts = {
       "127.0.0.1" = [ "localhost" ];
@@ -25,6 +25,14 @@ in
       allowedUDPPorts = [ 25 40 80 443 4000 ];
       allowedTCPPortRanges = [ { from = 60000; to = 65535; } ];
       allowedUDPPortRanges = [ { from = 60000; to = 65535; } ];
+    };
+
+    resolvconf = {
+      extraOptions = [
+        "nameserver 1.1.1.1"
+        "nameserver 8.8.8.8"
+        "nameserver 8.8.4.4"
+      ];
     };
   };
 

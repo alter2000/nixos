@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  i18n.consoleFont = "Lat2-Terminus16";
-  i18n.consoleKeyMap = "uk";
-
-  # console.font = "Lat2-Terminus16";
-  # console.keyMap = "uk";
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "uk";
 
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Tirane";

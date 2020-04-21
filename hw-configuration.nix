@@ -77,9 +77,13 @@ in
     # earlyVconsoleSetup = true;
   };
 
-  nix.maxJobs = lib.mkDefault 3;
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
+  nix = {
+    maxJobs = lib.mkDefault 3;
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
+    binaryCaches = [ "https://nixcache.reflex-frp.org" ];
+    binaryCachePublicKeys = [ "reflex-frp.org-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
+  };
 }
