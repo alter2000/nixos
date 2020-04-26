@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
+in
+
 {
   systemd.user = {
     services = {
@@ -65,10 +69,22 @@
         };
       };
 
+      "polkit-agent" = {
+        enable = lcfg.systemd.user.services.polkit-agent.enable or true;
+        description = "polkit auth daemon user service";
+        wantedBy = [ "default.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = {
+          ExecStart = lcfg.systemd.user.services.polkit-agent.execStart or "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+          ExecReload = "${pkgs.utillinux}/bin/kill -SIGUSR1 $MAINPID";
+          Restart = "always";
+          RestartSec = 2;
+        };
+      };
+
     };
 
     timers = {
-
       "1minute" = {
         enable = true;
         description = "1 minute timer";
@@ -78,13 +94,10 @@
           OnCalendar = "";
           Unit = "offlineimap.service";
         };
-        unitConfig = {
-          refuseManualStart = false;
-          refuseManualStop = false;
-        };
+        unitConfig.refuseManualStart = false;
+        unitConfig.refuseManualStop = false;
       };
-
     };
-  };
 
+  };
 }
