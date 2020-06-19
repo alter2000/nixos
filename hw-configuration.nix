@@ -62,15 +62,11 @@ in
     # };
 
     loader = {
-      systemd-boot = {
-        enable = true;
-        # editor = false;
-      };
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
       grub.enable = false;
+      systemd-boot.enable = true;
+      # systemd-boot.editor = false;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot";
       timeout = 2;
     };
     tmpOnTmpfs = true;
