@@ -29,9 +29,16 @@
         enable = true;
         enableSSHSupport = true;
         enableBrowserSocket = true;
+        pinentryFlavor = "gtk2";
       };
       dirmngr.enable = true;
     };
+
+    # ssh = {
+    #   agentTimeout = null;
+    #   askPassword = "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
+    #   startAgent = true;
+    # };
 
   };
 

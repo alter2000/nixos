@@ -19,16 +19,16 @@
 
   desktopManager.xterm.enable = false;
   displayManager = {
-    defaultSession = "none+i3";
-    sessionCommands = "exec ~/.xsession";
+    defaultSession = "none+xmonad";
 
-    session = [ {
-      name = "i3";
-      manage = "desktop";
-      start = ''
-        exec ~/.xsession
-      '';
-    } ];
+    # sessionCommands = "exec ~/.xsession";
+    # session = [ {
+    #   name = "i3";
+    #   manage = "desktop";
+    #   start = ''
+    #     exec ~/.xsession
+    #   '';
+    # } ];
 
     lightdm = {
       enable = true;
