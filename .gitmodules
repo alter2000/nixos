@@ -1,0 +1,3 @@
+[submodule "nixos-btrbk"]
+	path = nixos-btrbk
+	url = git@github.com:alter2000/nixos-btrbk
