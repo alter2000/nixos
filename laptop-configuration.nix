@@ -98,11 +98,12 @@ in
 
   location = {
     provider = "manual";
-    latitude = 50.0;
+    latitude = 35.0;
     longitude = 10.0;
   };
 
   services = {
+    # teamviewer.enable = true;
 
     thinkfan = {
       enable = true;
@@ -142,9 +143,9 @@ in
       enable = true;
       temperature = {
         day = 6300;
-        night = 4200;
+        night = 4100;
       };
-      extraOptions = [ "-g 0.8" ];
+      extraOptions = [ "-g 0.7" ];
     };
 
     lorri.enable = true;
