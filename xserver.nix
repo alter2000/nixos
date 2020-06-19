@@ -67,6 +67,7 @@
       enableContribAndExtras = true;
       extraPackages = hp: with hp; [
         xmonad-contrib
+        xmonad-extras
         monad-logger
       ];
     };
