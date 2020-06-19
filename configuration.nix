@@ -34,6 +34,8 @@
   };
 
   nix = {
+    binaryCaches = [ "https://nixcache.reflex-frp.org" ];
+    binaryCachePublicKeys = [ "reflex-frp.org-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
     allowedUsers = ["@wheel"];
     trustedUsers = ["alter2000" "root"];
     autoOptimiseStore = true;
