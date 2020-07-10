@@ -8,6 +8,12 @@
     adb.enable = true;
     less.enable = true;
     light.enable = true;
+    dconf.enable = true;
+    gpaste.enable = true;
+    iotop.enable = true;
+    # iftop.enable = true;
+    plotinus.enable = true;
+    qt5ct.enable = true;
 
     bash.enableCompletion = true;
     fish = {
