@@ -10,6 +10,7 @@
     light.enable = true;
     dconf.enable = true;
     gpaste.enable = true;
+    gphoto2.enable = true;
     iotop.enable = true;
     # iftop.enable = true;
     plotinus.enable = true;

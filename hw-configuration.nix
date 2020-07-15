@@ -62,6 +62,9 @@ in
         "xhci_pci"
       ];
     };
+    kernel.sysctl = {
+      "vm.swappiness" = 100;
+    };
 
     # plymouth = {
     #   enable = true;

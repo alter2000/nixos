@@ -17,6 +17,7 @@
           "alter2000"
           "adbusers"
           "ansible"
+          "camera"
           "dialout"
           "docker"
           "kubernetes"

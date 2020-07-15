@@ -5,10 +5,16 @@ let
 in
 
 {
+  xdg.portal = {
+    enable = true;
+    # extraPortals = with pkgs; [];
+  };
+
   services = {
     fstrim.enable = true;
     ntp.enable = true;
     tlp.enable = true;
+    flatpak.enable = true;
 
     acpid.enable = true;
     fprintd.enable = lcfg.services.fprintd.enable or true;
@@ -18,11 +24,6 @@ in
     dbus.packages = with pkgs; [
       gnome3.dconf
     ];
-
-    # flatpak = {
-    #   enable = true;
-    #   # extraPortals = [  ];
-    # };
 
     locate = {
       enable = true;
