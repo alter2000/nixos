@@ -43,14 +43,14 @@ in
         };
       };
 
-      "compton" = {
+      "picom" = {
         enable = true;
-        description = "custom compton service";
+        description = "custom picom service";
         wantedBy = [ "default.target" ];
         partOf = [ "graphical-session.target" ];
         path = [ pkgs.compton ];
         serviceConfig = {
-          ExecStart = "${pkgs.compton}/bin/compton";
+          ExecStart = "${pkgs.compton}/bin/picom";
           Restart = "always";
           RestartSec = 3;
         };
