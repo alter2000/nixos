@@ -1,5 +1,26 @@
 { pkgs }:
 
+let
+  i3pkgs = with pkgs; [
+    rofi
+    polybar
+    i3lock-color
+  ];
+
+  swaypkgs = with pkgs; [
+    wofi
+    waybar
+    swaylock
+  ];
+
+  xmonadpkgs = pkgs: with pkgs; [
+    xmonad-contrib
+    xmonad-extras
+    monad-logger
+  ];
+
+  isWayland = false;
+in
 {
   enable = true;
   layout = "gb";
@@ -19,16 +40,15 @@
 
   desktopManager.xterm.enable = false;
   displayManager = {
-    defaultSession = "none+xmonad";
+    defaultSession = "xsession";
 
-    # sessionCommands = "exec ~/.xsession";
-    # session = [ {
-    #   name = "i3";
-    #   manage = "desktop";
-    #   start = ''
-    #     exec ~/.xsession
-    #   '';
-    # } ];
+    session = [ {
+      name = "xsession";
+      manage = "desktop";
+      start = ''
+        exec ~/.xsession
+      '';
+    } ];
 
     lightdm = {
       enable = true;
@@ -50,26 +70,17 @@
   };
 
   windowManager = {
-    # sway = {
-    #   enable = true;
-    #   package = pkgs.sway;
-    #   extraPackages = with pkgs; [rofi waybar swaylock];
-    # };
-
     i3 = {
       enable = true;
       package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [ rofi polybar i3lock-color ];
+      extraPackages = i3pkgs;
     };
 
     xmonad = {
-      enable = true;
+      enable = false;
       enableContribAndExtras = true;
-      extraPackages = hp: with hp; [
-        xmonad-contrib
-        xmonad-extras
-        monad-logger
-      ];
+      extraPackages = xmonadpkgs;
+      haskellPackages = pkgs.haskell.packages.ghc883;
     };
 
   };
