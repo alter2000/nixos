@@ -4,8 +4,6 @@ let
   lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
 in
 {
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment = {
 
     extraOutputsToInstall = [
@@ -34,18 +32,23 @@ in
       wget wirelesstools
 
       aspell aspellDicts.en aspellDicts.fr aspellDicts.de
-      gucharmap gvfs
-      mpv
+      gvfs
       ncdu
-      pavucontrol
       tig
       unzip usbutils
     ]
     ++ (if config.services.xserver.enable then [
       chromium
       firefox
+      gucharmap
+      mpv
+      pavucontrol
+      qt5.qtwayland
       xarchiver xorg.xev xdotool xclip xsel
-      xfce.thunar-bare
+      gnome3.nautilus
+      # xfce.thunar
+      # xfce.thunar-archive-plugin
+      # xfce.thunar-volman
     ] else [])
     ++ (lcfg.extraPackages or []);
   };
