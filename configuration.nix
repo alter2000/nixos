@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   imports = [
@@ -41,15 +41,14 @@
     autoOptimiseStore = true;
     buildCores = 3;
     maxJobs = 3;
-    gc = {
-      automatic = false;
-      # man systemd.time
-      dates = "Wed,Sun";
-    };
-    optimise = {
-      automatic = true;
-      dates = ["wed" "sun"];
-    };
+    gc.automatic = false;
+    gc.dates = "Wed,Sun"; # man systemd.time
+    optimise.automatic = true;
+    optimise.dates = ["wed" "sun"];
+    nixPath =
+      [ "nixpkgs=channel:nixos-20.03" ]
+      ++ options.nix.nixPath.default
+      ;
   };
 
   # This value determines the NixOS release with which your system is to be

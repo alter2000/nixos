@@ -5,7 +5,6 @@ let
 in
 
 {
-  # Enable Wireguard
   networking.wireguard.enable = true;
   # "wg0" is the network interface name. You can name the interface arbitrarily.
   networking.wireguard.interfaces.wg0 = {
