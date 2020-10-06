@@ -62,11 +62,9 @@ in
 
     bluetooth = {
       enable = true;
+      powerOnBoot = true;
       package = pkgs.bluezFull;
-      # extraConfig = ''
-      #   [General]
-      #   Enable=Source,Sink,Media,Socket
-      # '';
+      config.General.Enable = "Source,Sink,Media,Socket";
     };
 
   };
@@ -84,6 +82,9 @@ in
       volumeStep = "3%";
     };
   };
+
+  environment.variables.XDG_DATA_DIRS = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS";
+  environment.variables.GSETTINGS_SCHEMA_DIR = "${pkgs.glib.getSchemaPath pkgs.gtk3}";
 
   # From https://github.com/NixOS/nixpkgs/issues/45492#issuecomment-418903252
   # Set limits for esync.
@@ -137,8 +138,6 @@ in
 
     xserver = (import ./xserver.nix { inherit pkgs; });
 
-    xbanish.enable = true;
-
     redshift = {
       enable = true;
       temperature = {
@@ -149,6 +148,22 @@ in
     };
 
     lorri.enable = true;
+    xbanish.enable = true;
+    gvfs.enable = true;
+    gvfs.package = pkgs.gnome3.gvfs;
+
+    udev.extraRules = ''
+      # DualShock 4 over USB hidraw
+      KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="05c4", MODE="0666"
+      # DualShock 4 wireless adapter over USB hidraw
+      KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ba0", MODE="0666"
+      # DualShock 4 Slim over USB hidraw
+      KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", MODE="0666"
+      # DualShock 4 over bluetooth hidraw
+      KERNEL=="hidraw*", KERNELS=="*054C:05C4*", MODE="0666"
+      # DualShock 4 Slim over bluetooth hidraw
+      KERNEL=="hidraw*", KERNELS=="*054C:09CC*", MODE="0666"
+    '';
   };
 
   # ratbag
