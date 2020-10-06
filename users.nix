@@ -9,28 +9,26 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
-    users = {
-      "alter2000" = {
-        isNormalUser = true;
-        uid = 1000;
-        extraGroups = [
-          "alter2000"
-          "adbusers"
-          "ansible"
-          "camera"
-          "dialout"
-          "docker"
-          "kubernetes"
-          "libvirtd"
-          "lxd"
-          "networkmanager"
-          "video"
-          "wheel"
-        ];
-        home = "/home/alter2000";
-        createHome = true;
-        shell = pkgs.zsh;
-      };
+    users."alter2000" = {
+      isNormalUser = true;
+      uid = 1000;
+      extraGroups = [
+        "alter2000"
+        "adbusers"
+        "ansible"
+        "camera"
+        "dialout"
+        "docker"
+        "kubernetes"
+        "libvirtd"
+        "lxd"
+        "networkmanager"
+        "video"
+        "wheel"
+      ];
+      home = "/home/alter2000";
+      createHome = true;
+      shell = pkgs.zsh;
     };
     defaultUserShell = pkgs.bash;
     extraGroups."vboxusers".members = [ "alter2000" ];
@@ -42,7 +40,7 @@
     # lxd.enable = true;
 
     libvirtd = {
-      enable = true;
+      enable = false;
       allowedBridges = [ "virbr0" "docker0" ];
     };
 

@@ -16,7 +16,7 @@ in
     gphoto2.enable = true;
     iotop.enable = true;
     # iftop.enable = true;
-    plotinus.enable = true;
+    # plotinus.enable = true;
     qt5ct.enable = true;
 
     bash.enableCompletion = true;

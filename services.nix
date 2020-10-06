@@ -7,8 +7,8 @@ in
 {
   xdg.portal = {
     enable = true;
-    gtkUsePortal = true;
-    # extraPortals = with pkgs; [];
+    gtkUsePortal = false;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   services = {

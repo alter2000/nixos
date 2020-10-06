@@ -32,7 +32,8 @@ in
       wget wirelesstools
 
       aspell aspellDicts.en aspellDicts.fr aspellDicts.de
-      gvfs
+      # gvfs
+      glib
       ncdu
       tig
       unzip usbutils
@@ -46,6 +47,7 @@ in
       qt5.qtwayland
       xarchiver xorg.xev xdotool xclip xsel
       gnome3.nautilus
+      gnome3.sushi
       # xfce.thunar
       # xfce.thunar-archive-plugin
       # xfce.thunar-volman
