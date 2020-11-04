@@ -43,7 +43,7 @@
       backend = "docker";
       containers = {
         epitest = {
-          autoStart = true;
+          autoStart = false;
           image = "epitechcontent/epitest-docker:latest";
           volumes = [ "/home/alter2000/epitheq:/test" ];
         };
