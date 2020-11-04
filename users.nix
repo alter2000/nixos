@@ -39,6 +39,17 @@
     # lxc.enable = true;
     # lxd.enable = true;
 
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        epitest = {
+          autoStart = true;
+          image = "epitechcontent/epitest-docker:latest";
+          volumes = [ "/home/alter2000/epitheq:/test" ];
+        };
+        ubuntu-lts.autoStart = false;
+        ubuntu-lts.image = "ubuntu:20.04";
+      };
     };
 
     docker = {
@@ -60,3 +71,16 @@
   };
 
 }
+
+# virtualisation.oci-containers.containers.mycroft = {
+#   autoStart = false;
+#   image = "mycroftai/docker-mycroft";
+#   ports = [ "8181:8181" ];
+#   volumes = [
+#     "/home/alter2000/var/mycroft:/root/.mycroft"
+#     "${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native"
+#     "/home/alter2000/.config/pulse/cookie:/root/.config/pulse/cookie"
+#   ];
+#   environment.PULSE_SERVER = "unix:${XDG_RUNTIME_DIR}/pulse/native";
+#   extraOptions = [ "--device /dev/snd" ];
+# };
