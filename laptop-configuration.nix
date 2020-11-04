@@ -85,7 +85,7 @@ in
   location = {
     provider = "manual";
     latitude = 35.0;
-    longitude = 10.0;
+    longitude = 15.0;
   };
 
   services = {
@@ -126,10 +126,8 @@ in
 
     redshift = {
       enable = true;
-      temperature = {
-        day = 6300;
-        night = 4100;
-      };
+      temperature.day = 6300;
+      temperature.night = 4000;
       extraOptions = [ "-g 0.7" ];
     };
 
