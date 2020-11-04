@@ -46,7 +46,7 @@
     optimise.automatic = true;
     optimise.dates = ["wed" "sun"];
     nixPath =
-      [ "nixpkgs=channel:nixos-20.03" ]
+      [ "nixpkgs=channel:nixos-20.09" ]
       ++ options.nix.nixPath.default
       ;
   };

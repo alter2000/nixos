@@ -3,7 +3,7 @@
 let
   i3pkgs = with pkgs; [
     rofi
-    polybar
+    # polybar
     i3lock-color
   ];
 
@@ -50,22 +50,21 @@ in
       '';
     } ];
 
-    lightdm = {
-      enable = true;
-      autoLogin.enable = false;
-      autoLogin.user = "alter2000";
-      greeters.mini = {
-        enable = true;
-        user = "alter2000";
-        extraConfig = ''
-          [greeter]
-          password-label-text = open me up daddy
+    autoLogin.enable = false;
+    autoLogin.user = "alter2000";
 
-          [greeter-theme]
-          background-image = ""
-          font = Iosevka
-        '';
-      };
+    lightdm.enable = true;
+    lightdm.greeters.mini = {
+      enable = true;
+      user = "alter2000";
+      extraConfig = ''
+        [greeter]
+        password-label-text = open me up daddy
+
+        [greeter-theme]
+        background-image = ""
+        font = Iosevka
+      '';
     };
   };
 
@@ -82,7 +81,6 @@ in
       extraPackages = xmonadpkgs;
       haskellPackages = pkgs.haskell.packages.ghc883;
     };
-
   };
 
 }

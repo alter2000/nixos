@@ -2,10 +2,6 @@
 
 let
   lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
-  unstable = import (fetchTarball
-      "channel:nixpkgs-unstable"
-      # "https://github.com/nixos/nixpkgs/master"
-    ) { inherit config; };
 in
 {
   networking = {
@@ -42,7 +38,6 @@ in
     pulseaudio = lcfg.hardware.pulseaudio or {
       enable = true;
       package = pkgs.pulseaudioFull;
-      support32Bit = true;
       extraModules = with pkgs; [ pulseaudio-modules-bt ];
     };
 
@@ -54,7 +49,6 @@ in
     };
 
     opengl = {
-      driSupport32Bit = true;
       driSupport = true;
       extraPackages = [ pkgs.vaapiIntel ];
       extraPackages32 = [ pkgs.pkgsi686Linux.libva ];
@@ -83,19 +77,10 @@ in
     };
   };
 
-  environment.variables.XDG_DATA_DIRS = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS";
-  environment.variables.GSETTINGS_SCHEMA_DIR = "${pkgs.glib.getSchemaPath pkgs.gtk3}";
+  # environment.variables.XDG_DATA_DIRS = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS";
+  # environment.variables.GSETTINGS_SCHEMA_DIR = "${pkgs.glib.getSchemaPath pkgs.gtk3}";
 
-  # From https://github.com/NixOS/nixpkgs/issues/45492#issuecomment-418903252
-  # Set limits for esync.
-  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
-
-  security.pam.loginLimits = [{
-      domain = "*";
-      type = "hard";
-      item = "nofile";
-      value = "1048576";
-  }];
+  programs.steam.enable = true;
 
   location = {
     provider = "manual";
@@ -105,6 +90,7 @@ in
 
   services = {
     # teamviewer.enable = true;
+    ratbagd.enable = true;
 
     thinkfan = {
       enable = true;
@@ -136,7 +122,7 @@ in
       # '';
     };
 
-    xserver = (import ./xserver.nix { inherit pkgs; });
+    xserver = import ./xserver.nix { inherit pkgs; };
 
     redshift = {
       enable = true;
@@ -166,8 +152,4 @@ in
     '';
   };
 
-  # ratbag
-  environment.systemPackages = [ unstable.libratbag unstable.piper ];
-  services.dbus.packages = [ unstable.libratbag ];
-  systemd.packages = [ unstable.libratbag ];
 }

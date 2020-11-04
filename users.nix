@@ -39,9 +39,6 @@
     # lxc.enable = true;
     # lxd.enable = true;
 
-    libvirtd = {
-      enable = false;
-      allowedBridges = [ "virbr0" "docker0" ];
     };
 
     docker = {
@@ -49,6 +46,9 @@
       autoPrune.enable = true;
       autoPrune.flags = [ "--all" ];
     };
+
+    libvirtd.enable = false;
+    libvirtd.allowedBridges = [ "virbr0" "docker0" ];
 
     virtualbox.host = {
       enable = false;
