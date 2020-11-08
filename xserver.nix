@@ -83,4 +83,18 @@ in
     };
   };
 
+  xautolock = let
+    locker = /home/alter2000/.dots/bin/lock.sh;
+    in {
+      # int -> minutes
+      enable = false;
+      time = 10;
+      inherit locker;
+      killtime = 0;
+      killer = locker;
+      enableNotifier = true;
+      notify = 10;
+      notifier = "${pkgs.libnotify}/bin/notify-send --urgency=critical \"Locking in 10 seconds\"";
+    };
+
 }
