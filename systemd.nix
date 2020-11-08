@@ -102,6 +102,11 @@ in
         };
       };
 
+      xcape = {
+        description = "xcape daemonized";
+        serviceConfig.ExecStart = "${pkgs.xcape}bin/xcape -t 200 -e 'Caps_Lock=Escape' -d";
+      };
+
     };
 
     timers = {
