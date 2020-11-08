@@ -8,7 +8,7 @@ in
   systemd.user = {
     services = {
 
-      "dunst" = {
+      dunst = {
         enable = true;
         description = "dunst service";
         wantedBy = [ "default.target" ];
@@ -21,7 +21,7 @@ in
         };
       };
 
-      "mpd" = {
+      mpd = {
         enable = true;
         description = "music player daemon";
         wantedBy = [ "default.target" ];
@@ -43,7 +43,7 @@ in
         };
       };
 
-      "picom" = {
+      picom = {
         enable = true;
         description = "custom picom service";
         wantedBy = [ "default.target" ];
@@ -56,7 +56,7 @@ in
         };
       };
 
-      "sxhkd" = {
+      sxhkd = {
         enable = true;
         description = "hotkey daemon user service";
         wantedBy = [ "default.target" ];
@@ -69,7 +69,7 @@ in
         };
       };
 
-      "polkit-agent" = {
+      polkit-agent = {
         enable = lcfg.systemd.user.services.polkit-agent.enable or true;
         description = "polkit auth daemon user service";
         wantedBy = [ "default.target" ];

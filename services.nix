@@ -22,24 +22,16 @@ in
     gpm.enable = true;
 
     dbus.socketActivated = true;
-    dbus.packages = with pkgs; [
-      gnome3.dconf
-    ];
+    dbus.packages = with pkgs; [ gnome3.dconf ];
 
-    locate = {
-      enable = true;
-      interval = "30min";
-    };
+    locate.enable = true;
+    locate.interval = "30min";
 
-    logind = {
-      lidSwitch = "suspend";
-      lidSwitchDocked = "ignore";
-    };
+    logind.lidSwitch = "suspend";
+    logind.lidSwitchDocked = "ignore";
 
-    offlineimap = {
-      enable = true;
-      path = [pkgs.bash pkgs.pass pkgs.python];
-    };
+    offlineimap.enable = true;
+    offlineimap.path = [pkgs.bash pkgs.pass pkgs.python];
 
     openssh = {
       enable = false;
@@ -53,15 +45,6 @@ in
       # enable = true;
       enableGeoIP = false;
     };
-
-    # clamav = {
-    #   daemon.enable = true;
-    #   updater = {
-    #     enable = true;
-    #     frequency = 3;
-    #     interval = "daily";
-    #   };
-    # };
 
   };
 }
