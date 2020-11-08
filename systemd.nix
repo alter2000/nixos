@@ -1,12 +1,32 @@
 { config, pkgs, ... }:
 
 let
+  arbtt = {
+    package = (import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-20.03.tar.gz)
+      {}).pkgs.haskellPackages.arbtt;
+    logFile = "%h/.local/share/arbtt/capture.log";
+    sampleRate = 60;
+  };
+
   lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
 in
 
 {
+  environment.systemPackages = [ arbtt.package ];
   systemd.user = {
     services = {
+
+      arbtt = {
+        description = "arbtt statistics capture service";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${arbtt.package}/bin/arbtt-capture --logfile=${arbtt.logFile} --sample-rate=${toString arbtt.sampleRate}";
+          Restart = "always";
+          RestartSec = 2;
+        };
+      };
 
       dunst = {
         enable = true;
