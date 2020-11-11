@@ -50,8 +50,14 @@ in
 
     opengl = {
       driSupport = true;
-      extraPackages = [ pkgs.vaapiIntel ];
       extraPackages32 = [ pkgs.pkgsi686Linux.libva ];
+      extraPackages = with pkgs; [
+        vaapiIntel
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+        intel-media-driver
+      ];
     };
 
     bluetooth = {
