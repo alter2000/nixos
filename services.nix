@@ -21,8 +21,7 @@ in
     fprintd.enable = lcfg.services.fprintd.enable or true;
     gpm.enable = true;
 
-    dbus.socketActivated = true;
-    dbus.packages = with pkgs; [ gnome3.dconf ];
+    dbus.packages = with pkgs; [ gnome.dconf ];
 
     locate.enable = true;
     locate.interval = "30min";

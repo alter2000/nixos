@@ -49,22 +49,24 @@ in
     };
 
     opengl = {
+      enable = true;
       driSupport = true;
-      extraPackages32 = [ pkgs.pkgsi686Linux.libva ];
+      driSupport32Bit = true;
       extraPackages = with pkgs; [
-        vaapiIntel
         vaapiIntel
         vaapiVdpau
         libvdpau-va-gl
         intel-media-driver
+        mesa
       ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
     };
 
     bluetooth = {
       enable = true;
       powerOnBoot = true;
       package = pkgs.bluezFull;
-      config.General.Enable = "Source,Sink,Media,Socket";
+      settings.General.Enable = "Source,Sink,Media,Socket";
     };
 
   };
@@ -100,22 +102,30 @@ in
 
     thinkfan = {
       enable = true;
-      fan = "tp_fan /proc/acpi/ibm/fan";
-      levels = ''
-        (0,	0,	42)
-        (1,	41,	45)
-        (2,	44,	48)
-        (3,	47,	51)
-        (4,	50,	53)
-        (5,	53,	60)
-        (6,	55,	66)
-        (7,	63,	32767)
-      '';
-      sensors = ''
-        hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
-        hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input
-        hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp3_input
-      '';
+      fans = [ { type = "tpacpi"; query = "/proc/acpi/ibm/fan"; }];
+      levels = [
+        [0	0	42]
+        [1	41	45]
+        [2	44	48]
+        [3	47	51]
+        [4	50	53]
+        [5	53	60]
+        [6	55	66]
+        ["level full-speed"	63	32767]
+        # ["level auto"	80	32767]
+      ];
+
+        # hwmon /sys/devices/virtual/thermal/thermal_zone0/hwmon0/temp1_input
+        # hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp1_input
+        #
+
+      sensors = [
+        { type = "hwmon"; query = "/sys/devices/platform/coretemp.0/hwmon/"; indices = [1 2 3]; }
+      ];
+
+      # preStart = "
+      #   /run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi
+      # ";
       # levels = ''
       #   (0,	0,	47)
       #   (1,	46,	51)
@@ -140,9 +150,9 @@ in
     lorri.enable = true;
     xbanish.enable = true;
     gvfs.enable = true;
-    gvfs.package = pkgs.gnome3.gvfs;
+    gvfs.package = pkgs.gnome.gvfs;
 
-    udev.extraRules = ''
+    udev.initrdRules = ''
       # DualShock 4 over USB hidraw
       KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="05c4", MODE="0666"
       # DualShock 4 wireless adapter over USB hidraw

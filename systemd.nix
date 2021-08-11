@@ -70,7 +70,7 @@ in
         partOf = [ "graphical-session.target" ];
         path = [ pkgs.compton ];
         serviceConfig = {
-          ExecStart = "${pkgs.compton}/bin/picom";
+          ExecStart = "${pkgs.picom}/bin/picom";
           Restart = "always";
           RestartSec = 3;
         };

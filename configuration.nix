@@ -22,7 +22,6 @@
       # usb.enable = true;
     };
     polkit.enable = true;
-    rngd.enable = true;
     rtkit.enable = true;
     sudo = {
       enable = true;
@@ -46,7 +45,7 @@
     optimise.automatic = true;
     optimise.dates = ["wed" "sun"];
     nixPath =
-      [ "nixpkgs=channel:nixos-20.09" ]
+      [ "nixpkgs=channel:nixos-21.05" ]
       ++ options.nix.nixPath.default
       ;
   };

@@ -2,6 +2,7 @@
 
 let
   lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
+  ifOn = c: p: if c then p else [];
 in
 {
   documentation = {
@@ -43,7 +44,7 @@ in
       tig
       unzip usbutils
     ]
-    ++ (if config.services.xserver.enable then [
+    ++ (ifOn config.services.xserver.enable [
       chromium
       firefox
       gucharmap
@@ -51,12 +52,14 @@ in
       pavucontrol
       qt5.qtwayland
       xarchiver xorg.xev xdotool xclip xsel
-      gnome3.nautilus
-      gnome3.sushi
+      gnome.nautilus
+      gnome.sushi
       # xfce.thunar
       # xfce.thunar-archive-plugin
       # xfce.thunar-volman
-    ] else [])
+    ])
+    ++ (ifOn (config.virtualisation.libvirtd.enable && config.services.xserver.enable)
+        [virt-manager])
     ++ (lcfg.extraPackages or []);
   };
 

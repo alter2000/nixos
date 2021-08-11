@@ -30,12 +30,14 @@ in
 
   libinput = {
     enable = true;
-    scrollMethod = "twofinger";
-    horizontalScrolling = true;
-    scrollButton = 1;
-    additionalOptions = ''
-      Option "TappingDrag" "true"
-    '';
+    touchpad = {
+      scrollMethod = "twofinger";
+      horizontalScrolling = true;
+      scrollButton = 1;
+      additionalOptions = ''
+        Option "TappingDrag" "true"
+      '';
+    };
   };
 
   desktopManager.xterm.enable = false;
