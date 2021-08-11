@@ -51,7 +51,7 @@ in
     # };
 
     sway = {
-      enable = true;
+      enable = false;
       extraPackages = swaypkgs;
       wrapperFeatures.base = true;
       wrapperFeatures.gtk = true;

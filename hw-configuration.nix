@@ -6,10 +6,9 @@ in
 {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    (if (lcfg.server or false) then
-        ./server-configuration.nix
-      else
-        ./laptop-configuration.nix)
+    (if (lcfg.server or false)
+     then ./server-configuration.nix
+     else ./laptop-configuration.nix)
   ];
 
   # https://discourse.nixos.org/t/runtime-alternative-to-patchelf-set-interpreter/3539/5
@@ -60,6 +59,7 @@ in
         "usb_storage"
         "usbhid"
         "xhci_pci"
+        # "i965"
       ];
     };
     kernelModules = [ "tpm-rng" ];
