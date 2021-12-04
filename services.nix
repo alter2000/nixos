@@ -13,9 +13,11 @@ in
 
   services = {
     fstrim.enable = true;
-    ntp.enable = true;
+    fwupd.enable = true;
+    # ntp.enable = true;
     tlp.enable = true;
     flatpak.enable = true;
+    udev.packages = [ pkgs.platformio ];
 
     acpid.enable = true;
     fprintd.enable = lcfg.services.fprintd.enable or true;
@@ -46,4 +48,8 @@ in
     };
 
   };
+
+  systemd.services.thinkfan.preStart = "
+    /run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi
+  ";
 }

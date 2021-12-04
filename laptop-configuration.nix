@@ -66,7 +66,8 @@ in
       enable = true;
       powerOnBoot = true;
       package = pkgs.bluezFull;
-      settings.General.Enable = "Source,Sink,Media,Socket";
+      # disabledPlugins = [ "sap" ];
+      # settings.General.Enable = "Source,Sink,Media,Socket";
     };
 
   };
@@ -115,17 +116,10 @@ in
         # ["level auto"	80	32767]
       ];
 
-        # hwmon /sys/devices/virtual/thermal/thermal_zone0/hwmon0/temp1_input
-        # hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp1_input
-        #
-
       sensors = [
         { type = "hwmon"; query = "/sys/devices/platform/coretemp.0/hwmon/"; indices = [1 2 3]; }
       ];
 
-      # preStart = "
-      #   /run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi
-      # ";
       # levels = ''
       #   (0,	0,	47)
       #   (1,	46,	51)

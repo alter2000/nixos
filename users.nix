@@ -13,16 +13,18 @@
       isNormalUser = true;
       uid = 1000;
       extraGroups = [
-        "alter2000"
         "adbusers"
+        "alter2000"
         "ansible"
         "camera"
         "dialout"
         "docker"
+        "input"
         "kubernetes"
         "libvirtd"
         "lxd"
         "networkmanager"
+        "uinput"
         "video"
         "wheel"
       ];

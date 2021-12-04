@@ -8,9 +8,9 @@ in
   documentation = {
     man.enable = true;
     man.generateCaches = true;
-    nixos.enable = true;
-    doc.enable = true;
-    dev.enable = true;
+    # nixos.enable = true;
+    # doc.enable = true;
+    # dev.enable = true;
   };
 
   environment = {
