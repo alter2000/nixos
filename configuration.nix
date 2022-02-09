@@ -12,7 +12,6 @@
     ./services.nix
     ./systemd.nix
     ./users.nix
-    /etc/nixos/cachix.nix
     ./wireguard.nix
   ];
 
@@ -33,8 +32,8 @@
   };
 
   nix = {
-    binaryCaches = [ "https://nixcache.reflex-frp.org" ];
-    binaryCachePublicKeys = [ "reflex-frp.org-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
+    # binaryCaches = [ "https://nixcache.reflex-frp.org" ];
+    # binaryCachePublicKeys = [ "reflex-frp.org-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
     allowedUsers = ["@wheel"];
     trustedUsers = ["alter2000" "root"];
     autoOptimiseStore = true;
@@ -56,6 +55,6 @@
   # should.
   system = {
     nixos.tags = ["alterpad"];
-    stateVersion = "20.03"; # Did you read the comment?
+    stateVersion = "21.11"; # Did you read the comment?
   };
 }

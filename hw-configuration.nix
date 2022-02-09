@@ -18,7 +18,7 @@ in
     mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
   '';
 
-  fileSystems = lib.mkDefault {
+  fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/lunix";
       fsType = "btrfs";
@@ -35,11 +35,11 @@ in
     };
   };
 
-  swapDevices = lib.mkDefault [ {
+  swapDevices = [ {
     device = "/dev/disk/by-partlabel/Swap";
   } ];
 
-  boot = lib.mkDefault {
+  boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     initrd = {
       checkJournalingFS = true;
@@ -83,7 +83,7 @@ in
   };
 
   nix = {
-    maxJobs = lib.mkDefault 3;
+    maxJobs = 3;
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
