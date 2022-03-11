@@ -13,6 +13,7 @@
     ./systemd.nix
     ./users.nix
     ./wireguard.nix
+    ./sway.nix
   ];
 
   security = {
