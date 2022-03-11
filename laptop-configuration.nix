@@ -4,11 +4,16 @@ let
   lcfg = (if builtins.pathExists ./local.nix then ./local.nix else {});
 in
 {
+  imports = [ # /home/alter2000/git/me/kmonad/nix/nixos-module.nix
+  ./actkbd-config.nix
+  ];
+  # services.kmonad.enable = true;
+  # services.kmonad.configfiles = [ /home/alter2000/git/me/kmonad/mine.kbd ];
+
   networking = {
     hostName = lcfg.networking.hostName or "alterpad";
     dhcpcd.enable = false;
     networkmanager.enable = true;
-    # useDHCP = true;
 
     hosts = {
       "127.0.0.1" = [ "localhost" ];
@@ -33,17 +38,16 @@ in
   };
 
   hardware = {
-    cpu.intel.updateMicrocode = lcfg.hardware.cpu.intel.updateMicrocode or true;
-
+    cpu.amd.updateMicrocode = true;
     pulseaudio = lcfg.hardware.pulseaudio or {
       enable = true;
       package = pkgs.pulseaudioFull;
-      extraModules = with pkgs; [ pulseaudio-modules-bt ];
+      extraModules = with pkgs; [ pulseaudio-modules-bt pulseaudio-dlna ];
     };
 
     trackpoint = lcfg.hardware.trackpoint or {
-      emulateWheel = true;
       enable = true;
+      emulateWheel = true;
       sensitivity = 130;
       speed = 120;
     };
@@ -53,20 +57,21 @@ in
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
-        vaapiIntel
         vaapiVdpau
         libvdpau-va-gl
-        intel-media-driver
         mesa
+        rocm-opencl-icd
+        rocm-opencl-runtime
+        amdvlk
       ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ libvdpau-va-gl vaapiVdpau driversi686Linux.amdvlk ];
     };
 
     bluetooth = {
       enable = true;
       powerOnBoot = true;
       package = pkgs.bluezFull;
-      # disabledPlugins = [ "sap" ];
+      disabledPlugins = [ "sap" ];
       # settings.General.Enable = "Source,Sink,Media,Socket";
     };
 
@@ -78,13 +83,9 @@ in
     powertop.enable = true;
   };
 
-  sound = {
-    enable = true;
-    mediaKeys = {
-      enable = true;
-      volumeStep = "3%";
-    };
-  };
+  sound.enable = true;
+
+  nix.package = pkgs.nixUnstable;
 
   # environment.variables.XDG_DATA_DIRS = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS";
   # environment.variables.GSETTINGS_SCHEMA_DIR = "${pkgs.glib.getSchemaPath pkgs.gtk3}";
@@ -100,6 +101,7 @@ in
   services = {
     # teamviewer.enable = true;
     ratbagd.enable = true;
+    # blueman.enable = true;
 
     thinkfan = {
       enable = true;
@@ -119,17 +121,6 @@ in
       sensors = [
         { type = "hwmon"; query = "/sys/devices/platform/coretemp.0/hwmon/"; indices = [1 2 3]; }
       ];
-
-      # levels = ''
-      #   (0,	0,	47)
-      #   (1,	46,	51)
-      #   (2,	50,	55)
-      #   (3,	54,	58)
-      #   (4,	57,	62)
-      #   (5,	60,	66)
-      #   (6,	55,66)
-      #   (7,	63,	32767)
-      # '';
     };
 
     xserver = import ./xserver.nix { inherit pkgs; };
@@ -137,8 +128,8 @@ in
     redshift = {
       enable = true;
       temperature.day = 6300;
-      temperature.night = 4000;
-      extraOptions = [ "-g 0.7" ];
+      temperature.night = 4300;
+      extraOptions = [ "-g 0.8" ];
     };
 
     lorri.enable = true;

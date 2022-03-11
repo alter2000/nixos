@@ -18,7 +18,7 @@ in
     variables = {
       PAGER = "less --ignore-case --status-column --raw-control-chars --quiet --window=-3";
       EDITOR = "vi";
-      GIO_EXTRA_MODULES = [ "${pkgs.gvfs}/lib/gio/modules" ];
+      GIO_EXTRA_MODULES = [ "${pkgs.gnome.gvfs}/lib/gio/modules" ];
     };
 
     systemPackages = with pkgs; [
@@ -32,16 +32,14 @@ in
       mosh
       ntfs3g
       parallel
-      ranger ripgrep rsync ruby
+      ranger ripgrep rsync
       stdmanpages
       tmux tree
       wget wirelesstools
 
       aspell aspellDicts.en aspellDicts.fr aspellDicts.de
-      # gvfs
       glib
       ncdu
-      tig
       unzip usbutils
     ]
     ++ (ifOn config.services.xserver.enable [

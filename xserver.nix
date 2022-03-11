@@ -7,19 +7,11 @@ let
     i3lock-color
   ];
 
-  swaypkgs = with pkgs; [
-    wofi
-    waybar
-    swaylock
-  ];
-
   xmonadpkgs = pkgs: with pkgs; [
     xmonad-contrib
     xmonad-extras
     monad-logger
   ];
-
-  isWayland = false;
 in
 {
   enable = true;
@@ -27,13 +19,16 @@ in
   xkbOptions = "caps:ctrl_modifier";
   autoRepeatDelay = 220;
   autoRepeatInterval = 34;
+  updateDbusEnvironment = true;
 
   libinput = {
     enable = true;
     touchpad = {
       scrollMethod = "twofinger";
+      naturalScrolling = false;
       horizontalScrolling = true;
       scrollButton = 1;
+      accelSpeed = "+0.3";
       additionalOptions = ''
         Option "TappingDrag" "true"
       '';

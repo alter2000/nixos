@@ -68,7 +68,7 @@ in
         description = "custom picom service";
         wantedBy = [ "default.target" ];
         partOf = [ "graphical-session.target" ];
-        path = [ pkgs.compton ];
+        path = [ pkgs.picom ];
         serviceConfig = {
           ExecStart = "${pkgs.picom}/bin/picom";
           Restart = "always";
@@ -81,6 +81,7 @@ in
         description = "hotkey daemon user service";
         wantedBy = [ "default.target" ];
         partOf = [ "graphical-session.target" ];
+        after = [ "graphical-session-pre.target" ];
         serviceConfig = {
           ExecStart = "${pkgs.sxhkd}/bin/sxhkd";
           ExecReload = "${pkgs.utillinux}/bin/kill -SIGUSR1 $MAINPID";
@@ -117,13 +118,13 @@ in
     };
 
     timers = {
-      "1minute" = {
+      "2minute" = {
         enable = true;
-        description = "1 minute timer";
+        description = "2 minute timer";
         wantedBy = [ "default.target" ];
         timerConfig = {
           Persistent = true;
-          OnCalendar = "";
+          OnUnitActiveSec = "120s";
           Unit = "offlineimap.service";
         };
         unitConfig.refuseManualStart = false;

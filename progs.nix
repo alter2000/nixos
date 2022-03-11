@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  swaypkgs = with pkgs; [ wofi waybar swaylock xwayland ];
-in
 {
   programs = {
     # Some programs need SUID wrappers, can be configured further or are
@@ -49,22 +46,6 @@ in
     #   askPassword = "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
     #   startAgent = true;
     # };
-
-    sway = {
-      enable = false;
-      extraPackages = swaypkgs;
-      wrapperFeatures.base = true;
-      wrapperFeatures.gtk = true;
-      extraSessionCommands = ''
-          export SDL_VIDEODRIVER=wayland
-          # needs qt5.qtwayland in systemPackages
-          export QT_QPA_PLATFORM=wayland
-          export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-          # Fix for some Java AWT applications (e.g. Android Studio)
-          export _JAVA_AWT_WM_NONREPARENTING=1
-        '';
-    };
-
   };
 
   fonts = {

@@ -25,7 +25,7 @@ in
       options = ["discard" "relatime" "subvol=@nixos" "compress=lzo" "space_cache"];
     };
     "/boot" = {
-      device = "/dev/disk/by-partlabel/esp";
+      device = "/dev/disk/by-label/esp";
       fsType = "vfat";
     };
     "/home" = {
@@ -35,9 +35,7 @@ in
     };
   };
 
-  swapDevices = [ {
-    device = "/dev/disk/by-partlabel/Swap";
-  } ];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -49,20 +47,23 @@ in
         "ext4"
         "exfat"
       ];
-      availableKernelModules = [
+      kernelModules = [
         "btrfs"
-        "crc32c_intel"
+        "amdgpu"
         "nvme"
         "rfkill"
-        "scsi_mod"
         "sd_mod"
         "usb_storage"
+      ];
+      availableKernelModules = [
+        "crc32c_intel"
+        "scsi_mod"
         "usbhid"
         "xhci_pci"
         # "i965"
       ];
     };
-    kernelModules = [ "tpm-rng" ];
+    kernelModules = [ "tpm-rng" "acpi_call" ];
     kernel.sysctl."vm.swappiness" = 100;
 
     # plymouth = {
@@ -80,13 +81,5 @@ in
     };
 
     tmpOnTmpfs = true;
-  };
-
-  nix = {
-    maxJobs = 3;
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-    '';
   };
 }

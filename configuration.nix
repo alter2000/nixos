@@ -37,8 +37,8 @@
     allowedUsers = ["@wheel"];
     trustedUsers = ["alter2000" "root"];
     autoOptimiseStore = true;
-    buildCores = 3;
-    maxJobs = 3;
+    buildCores = 10;
+    maxJobs = 10;
     gc.automatic = false;
     gc.dates = "Wed,Sun"; # man systemd.time
     optimise.automatic = true;
@@ -47,6 +47,10 @@
       [ "nixpkgs=channel:nixos-21.11" ]
       ++ options.nix.nixPath.default
       ;
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
   };
 
   # This value determines the NixOS release with which your system is to be

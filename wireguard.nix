@@ -1,4 +1,4 @@
-{ networking, ... }:
+{ networking, pkgs, ... }:
 
 let
   serverAddr = "209.97.134.36:51820";
@@ -37,5 +37,4 @@ in
       }
     ];
   };
-
 }
